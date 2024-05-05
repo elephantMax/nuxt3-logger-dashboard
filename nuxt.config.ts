@@ -10,4 +10,8 @@ export default defineNuxtConfig({
     },
     checker: true,
   },
+  colorMode: {
+    preference: 'light',
+  },
+  css: ['~/assets/css/index.css'],
 });
