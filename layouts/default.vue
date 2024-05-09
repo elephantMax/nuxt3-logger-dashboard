@@ -37,10 +37,13 @@ const links = [
         <h1 class="text-xl">
           Dashboard
         </h1>
-        <USelect
-          v-model="selectedLanguage"
-          :options="languagesOptions"
-        />
+        <div class="flex gap-2">
+          <ThemeButton />
+          <USelect
+            v-model="selectedLanguage"
+            :options="languagesOptions"
+          />
+        </div>
       </div>
     </header>
     <div class="h-full flex">
