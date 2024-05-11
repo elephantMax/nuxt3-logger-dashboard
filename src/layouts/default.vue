@@ -28,6 +28,10 @@ const pageTitle = computed<string>(() => {
   return '';
 });
 
+const handleLogout = () => {
+  navigateTo('/login');
+};
+
 useHead({
   title() {
     return `Web Logger - ${pageTitle.value}`;
@@ -88,6 +92,7 @@ useHead({
           <UButton
             class="w-full justify-center"
             icon="i-heroicons-arrow-left-end-on-rectangle-solid"
+            @click="handleLogout"
           >
             {{ $t('logout') }}
           </UButton>
