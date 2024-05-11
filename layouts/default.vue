@@ -2,23 +2,38 @@
 const languagesOptions = ['eng', 'ru'];
 const selectedLanguage = ref(languagesOptions[1]);
 
+const route = useRoute();
+
 const links = [
   {
     text: 'Dashboard',
-    link: '/',
+    link: '/dashboard',
     icon: 'i-heroicons-rectangle-group',
   },
   {
     text: 'Projects',
-    link: '/',
+    link: '/dashboard/projects',
     icon: 'i-heroicons-folder',
   },
   {
     text: 'API Keys',
-    link: '/',
+    link: '/dashboard/api',
     icon: 'i-heroicons-key',
   },
 ];
+
+const pageTitle = computed<string>(() => {
+  if (typeof route.meta.title === 'string') {
+    return route.meta.title;
+  }
+  return '';
+});
+
+useHead({
+  title() {
+    return `Web Logger - ${pageTitle.value}`;
+  },
+});
 </script>
 
 <template>
@@ -35,7 +50,7 @@ const links = [
       </NuxtLink>
       <div class="p-4 flex items-center pr-10 border-b-2 w-full justify-between">
         <h1 class="text-xl">
-          Dashboard
+          {{ pageTitle }}
         </h1>
         <div class="flex gap-2">
           <ThemeButton />
