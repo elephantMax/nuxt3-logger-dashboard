@@ -1,3 +1,11 @@
+# Nuxt 3 stack
+
+- nuxt v3.11.2
+- @nuxt/ui
+- @nuxt/eslint flat config
+- @nuxtjs/i18n
+- vitest
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
