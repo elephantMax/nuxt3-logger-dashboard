@@ -11,7 +11,7 @@ const icon = computed(() => {
 });
 
 const toggleTheme = () => {
-  colorMode.value = isDarkMode.value ? 'light' : 'dark';
+  colorMode.preference = colorMode.value = isDarkMode.value ? 'light' : 'dark';
 };
 </script>
 

@@ -14,4 +14,5 @@ export default defineNuxtConfig({
     preference: 'light',
   },
   css: ['~/assets/css/index.css'],
+  ssr: false,
 });
