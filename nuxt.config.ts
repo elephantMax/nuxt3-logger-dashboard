@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/test-utils/module',
     '@nuxtjs/i18n',
+    '@pinia/nuxt',
   ],
   eslint: {
     config: {

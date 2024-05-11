@@ -5,6 +5,7 @@
 - @nuxt/eslint flat config
 - @nuxtjs/i18n
 - vitest
+- pinia
 
 # Nuxt 3 Minimal Starter
 
