@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/ui',
     '@nuxt/test-utils/module',
+    '@nuxtjs/i18n',
   ],
   eslint: {
     config: {
@@ -48,5 +49,24 @@ export default defineNuxtConfig({
     features: fileURLToPath(new URL('./features', import.meta.url)),
     entities: fileURLToPath(new URL('./entities', import.meta.url)),
     shared: fileURLToPath(new URL('./shared', import.meta.url)),
+  },
+  i18n: {
+    strategy: 'no_prefix',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'lang',
+    },
+    vueI18n: 'src/i18n.config.ts',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+      },
+      {
+        code: 'ru',
+        name: 'Русский',
+      },
+    ],
   },
 });

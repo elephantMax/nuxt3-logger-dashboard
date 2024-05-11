@@ -1,26 +1,25 @@
 <script setup lang="ts">
-const languagesOptions = ['eng', 'ru'];
-const selectedLanguage = ref(languagesOptions[1]);
-
 const route = useRoute();
+const { t } = useI18n();
 
-const links = [
-  {
-    text: 'Dashboard',
-    link: '/dashboard',
-    icon: 'i-heroicons-rectangle-group',
-  },
-  {
-    text: 'Projects',
-    link: '/dashboard/projects',
-    icon: 'i-heroicons-folder',
-  },
-  {
-    text: 'API Keys',
-    link: '/dashboard/api',
-    icon: 'i-heroicons-key',
-  },
-];
+const links = computed<{ text: string; link: string; icon: string }[]>(() => {
+  return [
+    {
+      text: t('dashboard'),
+      link: '/dashboard',
+      icon: 'i-heroicons-rectangle-group',
+    },
+    {
+      text: t('projects'),
+      link: '/dashboard/projects',
+      icon: 'i-heroicons-folder',
+    },
+    {
+      text: t('api_keys'),
+      link: '/dashboard/api',
+      icon: 'i-heroicons-key',
+    }];
+});
 
 const pageTitle = computed<string>(() => {
   if (typeof route.meta.title === 'string') {
@@ -53,11 +52,8 @@ useHead({
           {{ pageTitle }}
         </h1>
         <div class="flex gap-2">
-          <ThemeButton />
-          <USelect
-            v-model="selectedLanguage"
-            :options="languagesOptions"
-          />
+          <ThemeSwitcher />
+          <LangSwitcher />
         </div>
       </div>
     </header>
@@ -93,7 +89,7 @@ useHead({
             class="w-full justify-center"
             icon="i-heroicons-arrow-left-end-on-rectangle-solid"
           >
-            Logout
+            {{ $t('logout') }}
           </UButton>
         </div>
       </aside>
