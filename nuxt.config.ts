@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from 'url';
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
@@ -18,6 +20,33 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light',
   },
+  components: {
+    dirs: [
+      {
+        path: '~/widgets',
+        pathPrefix: false,
+      },
+      {
+        path: '~/features',
+        pathPrefix: false,
+      },
+      {
+        path: '~/entities',
+        pathPrefix: false,
+      },
+      {
+        path: '~/shared',
+        pathPrefix: false,
+      },
+    ],
+  },
   css: ['~/assets/css/index.css'],
   ssr: false,
+  srcDir: 'src/',
+  alias: {
+    widgets: fileURLToPath(new URL('./widgets', import.meta.url)),
+    features: fileURLToPath(new URL('./features', import.meta.url)),
+    entities: fileURLToPath(new URL('./entities', import.meta.url)),
+    shared: fileURLToPath(new URL('./shared', import.meta.url)),
+  },
 });
