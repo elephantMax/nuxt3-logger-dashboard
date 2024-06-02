@@ -1,3 +1,9 @@
+import AuthService from '~/shared/api/services/auth-service';
+
+export interface ApiInstance {
+  auth: AuthService;
+}
+
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const tokensStorage = useTokensStorage();
@@ -33,40 +39,39 @@ export default defineNuxtPlugin(() => {
     },
     async onResponseError({ response, options }) {
       try {
+        const app = useNuxtApp();
+
+        const refreshToken = tokensStorage.getSpecificToken('refreshToken');
+
         const canRetry = typeof options.retry === 'number' && options.retry > 0;
 
-        if (response.status !== 401 || !refreshTokenCookie.value || !canRetry) {
+        if (response.status !== 401 || !refreshToken || !canRetry) {
           return;
         }
 
-        const request = await refreshFetcher<{
-          data: {
-            accessToken: string;
-            refreshToken: string;
-          };
-        }>('/api/refresh', {
-          method: 'POST',
-          body: {
-            refreshToken: refreshTokenCookie.value,
-          },
-        });
+        const request = await app.$api.auth.refreshToken(refreshToken);
 
-        const { data } = request;
+        const { tokens } = request;
 
         tokensStorage.set({
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
         });
       }
-      catch (error) {
+      catch {
         navigateTo('/logout');
       }
     },
   });
 
+  const services: ApiInstance = {
+    auth: new AuthService(fetcher, refreshFetcher),
+  };
+
   return {
     provide: {
-      api: fetcher,
+      fetcher,
+      api: services,
     },
   };
 });

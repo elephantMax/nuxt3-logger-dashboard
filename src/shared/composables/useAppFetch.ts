@@ -4,7 +4,7 @@ export const useAppFetch = <T>(url: string, options: UseFetchOptions<T> = {}) =>
   const app = useNuxtApp();
 
   return useFetch(url, {
-    $fetch: app.$api,
+    $fetch: app.$fetcher,
     ...options,
   });
 };
