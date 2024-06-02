@@ -75,4 +75,15 @@ export default defineNuxtConfig({
       redirect: '/login',
     },
   },
+  runtimeConfig: {
+    public: {
+      API_BASE_URL: process.env.NUXT_API_BASE_URL,
+    },
+  },
+  imports: {
+    dirs: [
+      'shared/composables/**',
+    ],
+  },
+
 });
