@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/shared/stores/auth-store';
+
+const authStore = useAuthStore();
+
 const formData = reactive({
   login: '',
   password: '',
 });
 
-const submitHandler = () => {
-  console.log(formData);
-
-  navigateTo('/dashboard');
+const submitHandler = async () => {
+  try {
+    await authStore.login(formData.login, formData.password);
+    navigateTo('/dashboard');
+  }
+  catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
@@ -20,6 +28,7 @@ const submitHandler = () => {
       <label>{{ $t('login_label') }}</label>
       <UInput
         v-model="formData.login"
+        data-test="login-input"
         type="text"
         placeholder="Login"
       />
@@ -28,6 +37,7 @@ const submitHandler = () => {
       <label>{{ $t('password_label') }}</label>
       <UInput
         v-model="formData.password"
+        data-test="password-input"
         type="password"
         placeholder="Password"
       />
