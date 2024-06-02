@@ -1,11 +1,13 @@
 # Nuxt 3 stack
 
 - nuxt v3.11.2
-- @nuxt/ui
-- @nuxt/eslint flat config
-- @nuxtjs/i18n
+- nuxt/ui
+- nuxt/eslint flat config
+- nuxtjs/i18n
 - vitest
 - pinia
+- nuxt/test-utils
+- vitest
 
 # Nuxt 3 Minimal Starter
 
