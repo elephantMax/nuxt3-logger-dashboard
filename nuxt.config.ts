@@ -83,6 +83,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: [
       'shared/composables/**',
+      'shared/ui/**',
     ],
   },
 

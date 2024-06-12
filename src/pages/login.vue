@@ -9,6 +9,6 @@ definePageMeta({
     <h1 class="text-2xl mb-2">
       {{ $t('sign_in_button') }}
     </h1>
-    <LoginForm />
+    <LoginForm class="w-[300px]" />
   </div>
 </template>
