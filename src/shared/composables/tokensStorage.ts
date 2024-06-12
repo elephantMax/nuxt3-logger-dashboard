@@ -19,5 +19,9 @@ export const useTokensStorage = () => {
     storage.value = tokens;
   };
 
-  return { get, getSpecificToken, set };
+  const clear = (): void => {
+    storage.value = null;
+  };
+
+  return { get, getSpecificToken, set, clear };
 };
