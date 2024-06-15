@@ -7,8 +7,8 @@ import { useAuthStore } from '~/shared/stores/auth-store';
 const authStore = useAuthStore();
 
 const formSchema = toTypedSchema(z.object({
-  login: z.string().min(5),
-  password: z.string().min(6),
+  login: z.string().min(1),
+  password: z.string().min(1),
 }));
 
 const { defineField, handleSubmit, meta, errors } = useForm({

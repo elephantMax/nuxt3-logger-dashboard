@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-const userSchema = z.object({
+export const userSchema = z.object({
+  id: z.string(),
   login: z.string(),
   name: z.string(),
 });
@@ -8,8 +9,8 @@ const userSchema = z.object({
 export const loginResponseValidator = z.object({
   user: userSchema,
   tokens: z.object({
-    access: z.string(),
-    refresh: z.string(),
+    accessToken: z.string(),
+    refreshToken: z.string(),
   }),
 });
 

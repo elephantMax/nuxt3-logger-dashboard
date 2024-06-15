@@ -10,16 +10,6 @@ export default defineNuxtPlugin({
     const config = useRuntimeConfig();
     const tokensStorage = useTokensStorage();
 
-    const accessTokenCookie = useCookie('access_token');
-    const refreshTokenCookie = useCookie('refresh_token');
-
-    if (typeof accessTokenCookie.value === 'string' && typeof refreshTokenCookie.value === 'string') {
-      tokensStorage.set({
-        accessToken: accessTokenCookie.value,
-        refreshToken: refreshTokenCookie.value,
-      });
-    }
-
     const refreshFetcher = $fetch.create({
       baseURL: config.public.API_BASE_URL,
       retryStatusCodes: [],

@@ -2,7 +2,7 @@ import type { ZodSchema } from 'zod';
 import { z } from 'zod';
 import type { $Fetch, NitroFetchOptions } from 'nitropack';
 import HttpFactory from '../httpFactory';
-import { loginResponseValidator } from '../schemas';
+import { loginResponseValidator, userSchema } from '../schemas';
 
 class AuthService extends HttpFactory {
   constructor(fetcher: $Fetch, private refreshFetcher: $Fetch) {
@@ -15,7 +15,7 @@ class AuthService extends HttpFactory {
       ...options,
     });
 
-    return schema.parse(response.data);
+    return schema.parse(response);
   }
 
   async login(login: string, password: string) {
@@ -38,6 +38,10 @@ class AuthService extends HttpFactory {
         refreshToken,
       },
     });
+  }
+
+  async getUser() {
+    return this.get('/auth/user', userSchema);
   }
 }
 

@@ -1,7 +1,16 @@
 import type { Tokens } from '~/shared/types';
 
 export const useTokensStorage = () => {
-  const storage = useState<Tokens | null>('tokens', () => null);
+  const storage = useLocalStorage<Tokens | null>('tokens', () => null, {
+    serializer: {
+      read(raw) {
+        return JSON.parse(raw);
+      },
+      write(value) {
+        return JSON.stringify(value);
+      },
+    },
+  });
 
   const get = (): Tokens | null => {
     return storage.value;
