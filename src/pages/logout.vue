@@ -18,5 +18,6 @@ definePageMeta({
       return navigateTo('/login', { redirectCode: 301 });
     },
   ],
+  name: 'logout',
 });
 </script>

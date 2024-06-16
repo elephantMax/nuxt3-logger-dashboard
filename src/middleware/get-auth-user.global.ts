@@ -1,7 +1,11 @@
 import { useAuthStore } from '~/shared/stores/auth-store';
 
-export default defineNuxtRouteMiddleware(async () => {
+export default defineNuxtRouteMiddleware(async (to) => {
   try {
+    if (to.name === 'logout') {
+      return;
+    }
+
     const authStore = useAuthStore();
     const tokensStorage = useTokensStorage();
 

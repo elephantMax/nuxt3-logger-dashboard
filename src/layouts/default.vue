@@ -4,7 +4,7 @@ import { useAuthStore } from '~/shared/stores/auth-store';
 const route = useRoute();
 const { t } = useI18n();
 
-const { user } = useAuthStore();
+const authStore = useAuthStore();
 
 const links = computed<{ text: string; link: string; icon: string }[]>(() => {
   return [
@@ -69,7 +69,7 @@ useHead({
       <aside class="flex flex-col border-r-2 min-w-[250px]">
         <div class="p-4 border-b-2 text-center">
           <span class="text-lg">
-            {{ user?.name }}
+            {{ authStore.userName }}
           </span>
         </div>
 

@@ -7,6 +7,10 @@ export const useAuthStore = defineStore('auth-store', () => {
   const authorized = ref<boolean>(false);
   const user = ref<User | null>(null);
 
+  const userName = computed<string>(() => {
+    return user.value?.name ?? '';
+  });
+
   async function login(login: string, password: string) {
     const response = await app.$api.auth.login(login, password);
     user.value = response.user;
@@ -39,6 +43,7 @@ export const useAuthStore = defineStore('auth-store', () => {
   return {
     authorized,
     user,
+    userName,
 
     login,
     logout,

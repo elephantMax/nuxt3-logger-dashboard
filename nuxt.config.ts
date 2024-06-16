@@ -75,6 +75,12 @@ export default defineNuxtConfig({
     '/': {
       redirect: '/login',
     },
+    '/dashboard/**': {
+      appMiddleware: ['authorized'],
+    },
+    '/login': {
+      appMiddleware: ['unauthorized'],
+    },
   },
   runtimeConfig: {
     public: {
@@ -87,5 +93,4 @@ export default defineNuxtConfig({
       'shared/ui/**',
     ],
   },
-
 });
