@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import LoginForm from './login-form.vue';
 import { useAuthStore } from '~/shared/stores/auth-store';
@@ -8,10 +8,6 @@ describe('login-form', () => {
 
   beforeEach(() => {
     authStore.$reset();
-  });
-
-  afterEach(() => {
-    vi.resetAllMocks();
   });
 
   it('successfully rendered', async () => {

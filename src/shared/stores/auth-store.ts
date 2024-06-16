@@ -1,6 +1,6 @@
 import type { User } from '~/shared/api/schemas';
 
-export const useAuthStore = defineStore('auth-store', () => {
+export const useAuthStore = defineStore('auth', () => {
   const tokensStorage = useTokensStorage();
   const app = useNuxtApp();
 
