@@ -32,10 +32,6 @@ const pageTitle = computed<string>(() => {
   return '';
 });
 
-const handleLogout = () => {
-  navigateTo('/login');
-};
-
 useHead({
   title() {
     return `Web Logger - ${pageTitle.value}`;
@@ -60,8 +56,8 @@ useHead({
           {{ pageTitle }}
         </h1>
         <div class="flex gap-2">
-          <ThemeSwitcher />
-          <LangSwitcher />
+          <theme-switcher />
+          <lang-switcher />
         </div>
       </div>
     </header>
@@ -93,13 +89,7 @@ useHead({
           </ul>
         </div>
         <div class="p-4 border-b-2">
-          <UButton
-            class="w-full justify-center"
-            icon="i-heroicons-arrow-left-end-on-rectangle-solid"
-            @click="handleLogout"
-          >
-            {{ $t('logout') }}
-          </UButton>
+          <logout-button class="w-full" />
         </div>
       </aside>
       <main class="p-4">

@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth-store', () => {
     return response;
   }
 
-  async function logout() {
+  function logout() {
     tokensStorage.clear();
     user.value = null;
     authorized.value = false;
