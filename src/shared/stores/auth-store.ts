@@ -4,8 +4,9 @@ export const useAuthStore = defineStore('auth', () => {
   const tokensStorage = useTokensStorage();
   const app = useNuxtApp();
 
-  const authorized = ref<boolean>(false);
   const user = ref<User | null>(null);
+
+  const authorized = computed<boolean>(() => Boolean(user.value));
 
   const userName = computed<string>(() => {
     return user.value?.name ?? '';
@@ -18,25 +19,21 @@ export const useAuthStore = defineStore('auth', () => {
       accessToken: response.tokens.accessToken,
       refreshToken: response.tokens.refreshToken,
     });
-    authorized.value = true;
     return response;
   }
 
   function logout() {
     tokensStorage.clear();
     user.value = null;
-    authorized.value = false;
   }
 
   async function getUser() {
     const response = await app.$api.auth.getUser();
 
     user.value = response;
-    authorized.value = true;
   }
 
   function $reset() {
-    authorized.value = false;
     user.value = null;
   }
 
