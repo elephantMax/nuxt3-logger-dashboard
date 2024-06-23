@@ -7,6 +7,7 @@ export interface ApiInstance {
 export default defineNuxtPlugin({
   name: 'api',
   setup() {
+    const app = useNuxtApp();
     const config = useRuntimeConfig();
     const tokensStorage = useTokensStorage();
 
@@ -31,8 +32,6 @@ export default defineNuxtPlugin({
       },
       async onResponseError({ response, options }) {
         try {
-          const app = useNuxtApp();
-
           const refreshToken = tokensStorage.getSpecificToken('refreshToken');
 
           const canRetry = typeof options.retry === 'number' && options.retry > 0;

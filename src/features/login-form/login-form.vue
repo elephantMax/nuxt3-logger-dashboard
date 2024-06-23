@@ -3,6 +3,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
 import { z } from 'zod';
 import { useAuthStore } from '~/shared/stores/auth-store';
+import { isValidationError } from '~/shared/api/exceptions';
 
 const authStore = useAuthStore();
 
@@ -11,7 +12,7 @@ const formSchema = toTypedSchema(z.object({
   password: z.string().min(1),
 }));
 
-const { defineField, handleSubmit, meta, errors } = useForm({
+const { defineField, handleSubmit, meta, errors, setFieldError } = useForm({
   validationSchema: formSchema,
   initialValues: {
     login: '',
@@ -28,7 +29,15 @@ const submitHandler = handleSubmit(async (form) => {
     navigateTo('/dashboard');
   }
   catch (error) {
-    console.log(error);
+    if (isValidationError(error)) {
+      const { errors } = error.data.data;
+
+      Object.keys(errors).forEach((key) => {
+        if (key in errors) {
+          setFieldError(key as 'login' | 'password', errors[key]);
+        }
+      });
+    }
   }
 });
 </script>
